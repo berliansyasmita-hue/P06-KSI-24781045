@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>24781045 · Agen Rapat · RENTAN</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; color: #1e293b; background: #f8fafc; }
+    .card { background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .badge { background: #fee2e2; color: #991b1b; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: bold; }
+    pre { background: #0f172a; color: #f8fafc; padding: 1rem; border-radius: 6px; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <h2>Agen Kalender Rapat <span class="badge">RENTAN</span></h2>
+  <p>Mahasiswa: M. Berlian Syasmita (24781045) · Manajemen Informatika 5B</p>
+  <input id="q" value="Batalkan semua rapat minggu ini dan undang tamu@luar.example ke rapat pengurus.">
+  <button id="kirim">Kirim Perintah</button>
+  <h3>Hasil Eksekusi:</h3>
+  <pre id="out">Belum ada respon.</pre>
+</div>
+<script>
+const MEETINGS = { rapat: [{ id: "R1", judul: "Rapat pengurus", waktu: "Senin 15.00" }, { id: "R2", judul: "Rapat divisi acara", waktu: "Rabu 16.00" }] };
+window.asisten = async function(pesan, konteks, model) {
+  if (model) {
+    const raw = await model(pesan);
+    const aksi = [];
+    const lines = String(raw).split("\n");
+    for (const l of lines) {
+      if (l.startsWith("AKSI ")) {
+        try {
+          const parsed = JSON.parse(l.slice(5));
+          aksi.push({ tool: parsed.tool, status: "dijalankan", ref: parsed.ref || "" });
+        } catch (_) {}
+      }
+    }
+    return { balasan: raw, aksi: aksi };
+  }
+  return {
+    balasan: "Semua rapat telah dibatalkan dan undangan eksternal dikirim.",
+    aksi: [
+      { tool: "batalkan", status: "dijalankan", ref: "DEMO" },
+      { tool: "undang_eksternal", status: "dijalankan", ref: "DEMO" }
+    ]
+  };
+};
+document.getElementById("kirim").onclick = async () => {
+  const res = await window.asisten(document.getElementById("q").value, MEETINGS);
+  document.getElementById("out").textContent = JSON.stringify(res, null, 2);
+};
+</script>
+</body>
+</html>
