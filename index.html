@@ -225,6 +225,45 @@
     }
     .btn-aman:hover { background: rgba(34,197,94,0.2); border-color: rgba(34,197,94,0.5); }
 
+    /* ---- QUICK ACCESS BUTTONS ---- */
+    .quick-access {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.65rem;
+      margin-top: 2.5rem;
+    }
+    .qa-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.65rem 1.25rem; border-radius: 10px;
+      font-size: 0.82rem; font-weight: 600; text-decoration: none;
+      border: 1px solid var(--border2);
+      background: var(--bg3);
+      color: var(--text);
+      transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+      position: relative; overflow: hidden;
+    }
+    .qa-btn::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(99,102,241,0.08), transparent);
+      opacity: 0; transition: opacity 0.22s;
+    }
+    .qa-btn:hover {
+      border-color: rgba(99,102,241,0.5);
+      background: rgba(22,27,39,0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(99,102,241,0.15);
+      color: #c7d2fe;
+    }
+    .qa-btn:hover::before { opacity: 1; }
+    .qa-btn .qa-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; font-weight: 700;
+      color: var(--accent);
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(99,102,241,0.25);
+      padding: 0.1rem 0.4rem; border-radius: 4px;
+      min-width: 1.6rem; text-align: center;
+    }
+    .qa-btn .qa-icon { font-size: 1rem; }
+
     /* ---- VULN INFO CARDS ---- */
     .info-card {
       background: var(--bg3); border: 1px solid var(--border);
@@ -290,6 +329,30 @@
       <div class="stat"><span class="stat-value">2</span><span class="stat-label">Jenis Kerentanan</span></div>
       <div class="stat"><span class="stat-value">8</span><span class="stat-label">Halaman Test</span></div>
     </div>
+
+    <!-- QUICK ACCESS BUTTONS -->
+    <div class="quick-access">
+      <a href="#sc-kantin" class="qa-btn">
+        <span class="qa-icon">🛒</span>
+        <span class="qa-num">01</span>
+        Kantin Voucher
+      </a>
+      <a href="#sc-ulasan" class="qa-btn">
+        <span class="qa-icon">⭐</span>
+        <span class="qa-num">02</span>
+        Ulasan Produk
+      </a>
+      <a href="#sc-rapat" class="qa-btn">
+        <span class="qa-icon">📅</span>
+        <span class="qa-num">03</span>
+        Agen Rapat
+      </a>
+      <a href="#sc-rekap" class="qa-btn">
+        <span class="qa-icon">📊</span>
+        <span class="qa-num">04</span>
+        Rekap UKM
+      </a>
+    </div>
   </div>
 
   <!-- SCENARIOS -->
@@ -298,7 +361,7 @@
     <div class="grid grid-2">
 
       <!-- Kantin Voucher -->
-      <div class="card scenario-card">
+      <div id="sc-kantin" class="card scenario-card">
         <div class="scenario-header">
           <div class="scenario-icon icon-blue">🛒</div>
           <div class="badge badge-red">● LIVE-1 · Wajib</div>
@@ -321,7 +384,7 @@
       </div>
 
       <!-- Ulasan Produk -->
-      <div class="card scenario-card">
+      <div id="sc-ulasan" class="card scenario-card">
         <div class="scenario-header">
           <div class="scenario-icon icon-purple">⭐</div>
           <div class="badge badge-cyan">● Indirect Injection</div>
@@ -344,7 +407,7 @@
       </div>
 
       <!-- Agen Rapat -->
-      <div class="card scenario-card">
+      <div id="sc-rapat" class="card scenario-card">
         <div class="scenario-header">
           <div class="scenario-icon icon-cyan">📅</div>
           <div class="badge badge-amber">● Agen Tool-Use</div>
@@ -367,7 +430,7 @@
       </div>
 
       <!-- Rekap UKM -->
-      <div class="card scenario-card">
+      <div id="sc-rekap" class="card scenario-card">
         <div class="scenario-header">
           <div class="scenario-icon icon-amber">📊</div>
           <div class="badge badge-purple">● Sensitive Disclosure</div>
