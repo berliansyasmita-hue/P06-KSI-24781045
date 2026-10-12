@@ -225,44 +225,64 @@
     }
     .btn-aman:hover { background: rgba(34,197,94,0.2); border-color: rgba(34,197,94,0.5); }
 
-    /* ---- QUICK ACCESS BUTTONS ---- */
+    /* ---- QUICK ACCESS GRID ---- */
     .quick-access {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.65rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.75rem;
       margin-top: 2.5rem;
+      width: 100%;
+      max-width: 900px;
+      margin-left: auto; margin-right: auto;
     }
-    .qa-btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.65rem 1.25rem; border-radius: 10px;
-      font-size: 0.82rem; font-weight: 600; text-decoration: none;
-      border: 1px solid var(--border2);
+    .qa-group {
       background: var(--bg3);
-      color: var(--text);
-      transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
-      position: relative; overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .qa-btn::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(99,102,241,0.08), transparent);
-      opacity: 0; transition: opacity 0.22s;
+    .qa-group:hover {
+      border-color: var(--border2);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.3);
     }
-    .qa-btn:hover {
-      border-color: rgba(99,102,241,0.5);
-      background: rgba(22,27,39,0.9);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(99,102,241,0.15);
-      color: #c7d2fe;
+    .qa-label {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-size: 0.78rem; font-weight: 700; color: var(--muted);
+      margin-bottom: 0.1rem;
     }
-    .qa-btn:hover::before { opacity: 1; }
-    .qa-btn .qa-num {
+    .qa-label .qa-num {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem; font-weight: 700;
-      color: var(--accent);
+      font-size: 0.65rem; color: var(--accent);
       background: rgba(99,102,241,0.12);
       border: 1px solid rgba(99,102,241,0.25);
-      padding: 0.1rem 0.4rem; border-radius: 4px;
-      min-width: 1.6rem; text-align: center;
+      padding: 0.05rem 0.35rem; border-radius: 4px;
     }
-    .qa-btn .qa-icon { font-size: 1rem; }
+    .qa-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+    .qa-link {
+      display: flex; align-items: center; justify-content: center; gap: 0.3rem;
+      padding: 0.5rem 0.4rem; border-radius: 8px;
+      font-size: 0.75rem; font-weight: 700; text-decoration: none;
+      border: 1px solid transparent;
+      transition: all 0.18s;
+    }
+    .qa-link.rentan {
+      background: rgba(239,68,68,0.1); color: #f87171;
+      border-color: rgba(239,68,68,0.25);
+    }
+    .qa-link.rentan:hover {
+      background: rgba(239,68,68,0.22); border-color: #ef4444;
+      transform: translateY(-1px); box-shadow: 0 4px 12px rgba(239,68,68,0.2);
+    }
+    .qa-link.aman {
+      background: rgba(34,197,94,0.1); color: #4ade80;
+      border-color: rgba(34,197,94,0.25);
+    }
+    .qa-link.aman:hover {
+      background: rgba(34,197,94,0.22); border-color: #22c55e;
+      transform: translateY(-1px); box-shadow: 0 4px 12px rgba(34,197,94,0.2);
+    }
 
     /* ---- VULN INFO CARDS ---- */
     .info-card {
@@ -330,28 +350,57 @@
       <div class="stat"><span class="stat-value">8</span><span class="stat-label">Halaman Test</span></div>
     </div>
 
-    <!-- QUICK ACCESS BUTTONS -->
+    <!-- QUICK ACCESS GRID -->
     <div class="quick-access">
-      <a href="#sc-kantin" class="qa-btn">
-        <span class="qa-icon">🛒</span>
-        <span class="qa-num">01</span>
-        Kantin Voucher
-      </a>
-      <a href="#sc-ulasan" class="qa-btn">
-        <span class="qa-icon">⭐</span>
-        <span class="qa-num">02</span>
-        Ulasan Produk
-      </a>
-      <a href="#sc-rapat" class="qa-btn">
-        <span class="qa-icon">📅</span>
-        <span class="qa-num">03</span>
-        Agen Rapat
-      </a>
-      <a href="#sc-rekap" class="qa-btn">
-        <span class="qa-icon">📊</span>
-        <span class="qa-num">04</span>
-        Rekap UKM
-      </a>
+
+      <!-- 01 Kantin -->
+      <div class="qa-group">
+        <div class="qa-label">
+          <span class="qa-num">01</span>
+          🛒 Kantin Voucher
+        </div>
+        <div class="qa-pair">
+          <a href="24781045-kantin-voucher-rentan.html" class="qa-link rentan">⚠ Rentan</a>
+          <a href="24781045-kantin-voucher-aman.html"   class="qa-link aman">✓ Aman</a>
+        </div>
+      </div>
+
+      <!-- 02 Ulasan -->
+      <div class="qa-group">
+        <div class="qa-label">
+          <span class="qa-num">02</span>
+          ⭐ Ulasan Produk
+        </div>
+        <div class="qa-pair">
+          <a href="24781045-ulasan-produk-rentan.html" class="qa-link rentan">⚠ Rentan</a>
+          <a href="24781045-ulasan-produk-aman.html"   class="qa-link aman">✓ Aman</a>
+        </div>
+      </div>
+
+      <!-- 03 Agen Rapat -->
+      <div class="qa-group">
+        <div class="qa-label">
+          <span class="qa-num">03</span>
+          📅 Agen Rapat
+        </div>
+        <div class="qa-pair">
+          <a href="24781045-agen-rapat-rentan.html" class="qa-link rentan">⚠ Rentan</a>
+          <a href="24781045-agen-rapat-aman.html"   class="qa-link aman">✓ Aman</a>
+        </div>
+      </div>
+
+      <!-- 04 Rekap UKM -->
+      <div class="qa-group">
+        <div class="qa-label">
+          <span class="qa-num">04</span>
+          📊 Rekap UKM
+        </div>
+        <div class="qa-pair">
+          <a href="24781045-rekap-ukm-rentan.html" class="qa-link rentan">⚠ Rentan</a>
+          <a href="24781045-rekap-ukm-aman.html"   class="qa-link aman">✓ Aman</a>
+        </div>
+      </div>
+
     </div>
   </div>
 
